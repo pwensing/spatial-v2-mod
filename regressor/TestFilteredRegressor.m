@@ -32,8 +32,7 @@ C1 = cell2mat(C1);
 H1 = cell2mat(H1);
 
 [Mqd, CTqd] = MandCTqd(fbmodel,q,qd);
-Mqd = cell2mat(Mqd)
-CTqd= cell2mat(CTqd)
+
 
 qdv = cell2mat(qd)
 
@@ -42,7 +41,14 @@ eCTqd = C1'*qdv - CTqd;
 
 lambda = .2;
 
-Y = cell2mat( MandCTY(fbmodel, qd, q, lambda) );
+Y =  MandCTY(fbmodel, qd, q, lambda) ;
+
+
+Yb = Y(1:6,:);
+Yb2 =  MandCTYb(fbmodel, qd, q, lambda) ;
+
+eYb = norm( Yb2 + Yb )
+
 
 eY = norm( -lambda*Mqd-CTqd-Y*a)
 

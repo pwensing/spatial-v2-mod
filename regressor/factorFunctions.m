@@ -3,7 +3,7 @@ function B = factorFunctions(I, v, number)
         number = 3;
     end
     if number == 1
-       B = 1/2 * crf(v)*I; 
+       B = crf(v)*I; 
     elseif number == 2
        B =  crfinv( I * v) - I * crm(v); 
     else

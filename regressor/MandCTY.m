@@ -3,7 +3,7 @@ function  Y  = MCTY( model, qd,q , lambda, factorFunction)
 %
 
 if nargin == 4
-    factorFunction = @(I,v)(factorFunctions(I,v, 3));
+    factorFunction = @(I,v)(factorFunctions(I,v, 1));
 end
 
 for i = 1:model.NB
