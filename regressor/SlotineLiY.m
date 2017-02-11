@@ -3,6 +3,11 @@ function  Y = SlotineLiY( model, qddr, qdr,qd,q, factorFunction)
 if nargin == 5
     factorFunction = @(I,v)(factorFunctions(I,v, 3));
 end
+Xup = repmat({zeros(6,6)},model.NB,1);
+v   = repmat({zeros(6,1)},model.NB,1);
+w   = repmat({zeros(6,1)},model.NB,1);
+wd  = repmat({zeros(6,1)},model.NB,1);
+F  = repmat({zeros(6,10)},model.NB,1);
 
 
 for i = 1:model.NB
@@ -19,7 +24,6 @@ for i = 1:model.NB
     w{i} = Xup{i}*w{model.parent(i)} + vJr;
     wd{i}= Xup{i}*wd{model.parent(i)} + S{i} * qddr{i} + crm(v{i})*vJr;
   end
-  F{i} = zeros(6,10);
   for k = 1:10
      ak = zeros(10,1); ak(k) = 1;
      Ik = inertiaVecToMat(ak);

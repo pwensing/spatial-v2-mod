@@ -27,6 +27,6 @@ for i = 1:model.NB
      Ik = inertiaVecToMat(ak);
      h{i}(:,k) = Ik * v{i};
   end  
-  Y{1,i} = X1{i}' * (lambda * h{i}) - crf(v{1}) *X1{i}' * h{i};
+  Y{1,i} =  (lambda * eye(6) - crf(v{1}) ) *X1{i}' * h{i};
 end
 Y = cell2mat( Y );

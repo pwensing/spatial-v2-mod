@@ -66,7 +66,7 @@ for i = 1:model.NB
   while model.parent(j) > 0
     fh = Xup{j}' * fh;
     j = model.parent(j);
-    H{i,j} = S{j}' * fh;
-    H{j,i} = H{i,j}';
+    H{j,i} = S{j}' * fh;
+    H{i,j} = H{j,i}';
   end
 end

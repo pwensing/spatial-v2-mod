@@ -17,6 +17,8 @@ qt = rand(1,4);
 qt = qt/norm(qt);
 q = { [qt 0 0 0]', -3, 2, 1, 4};
 qd= { rand(6,1)*5, 5 , 2 , -4.430, 3.22 }';
+zqd= { rand(6,1)*0, 0 , 0 , 0, 0 }';
+
 qdr = { rand(6,1)*5, rand(1) , rand(1) , rand(1), rand(1) };
 qddr= { rand(6,1)*5, rand(1) , rand(1) , rand(1), rand(1) };
 
@@ -43,14 +45,24 @@ lambda = .2;
 
 Y =  MandCTY(fbmodel, qd, q, lambda) ;
 
+Yg =SlotineLiY(fbmodel, zqd, zqd, zqd, q);
+
+
 
 Yb = Y(1:6,:);
 Yb2 =  MandCTYb(fbmodel, qd, q, lambda) ;
 
 eYb = norm( Yb2 + Yb )
-
-
 eY = norm( -lambda*Mqd-CTqd-Y*a)
+
+
+[p w] = pwTerms(fbmodel, qd,q , lambda)
+
+Yfg = Y + Yg;
+
+ew = norm( Yfg(1:6,:) + w)
+
+
 
 
 
