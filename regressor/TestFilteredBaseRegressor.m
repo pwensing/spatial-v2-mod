@@ -40,8 +40,8 @@ lambda = 1e-3;
 
 % Inialize regressors
 W = zeros( length(cell2mat(qd)),fbmodel.NB*10);          % Compute explicitly from filtered Y
-U = zeros( 6, fbmodel.NB*10);                            % Computed based on new equations
-V = zeros( 6, fbmodel.NB*10);
+Ub = zeros( 6, fbmodel.NB*10);                            % Computed based on new equations
+Vb = zeros( 6, fbmodel.NB*10);
 
 qdd = { rand(6,1), rand(1), rand(1), rand(1), rand(1)}';
 
@@ -80,7 +80,7 @@ while t < 100*dt
     tauf2= tauf2+ dt*lambda*(lambda*Mqd + CTqd -g - tauf2);
     
     % Filter w_ik to get V_ik
-    V = V + dt*lambda*(w - V);   
+    Vb = Vb + dt*lambda*(w - Vb);   
     
     % integrate
     for i = 1:length(q)
@@ -98,8 +98,8 @@ end
 % Compute U from impulse response of filter
 imp_response_t = lambda * exp(-lambda* t);
 imp_response_0 = lambda;
-U = imp_response_0*pT - imp_response_t*p0;
+Ub = imp_response_0*pT - imp_response_t*p0;
 
 % Check Our computation
-Wbtest = U - V;
+Wbtest = Ub - Vb;
 filteredBaseRegressorErr = max( max( abs ( Wbtest - W(1:6,:) ) ) )
